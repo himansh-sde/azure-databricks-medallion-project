@@ -1,0 +1,24 @@
+name: Databricks CI/CD Sync
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Sync Databricks Workspace
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          REPO_PATH: /Workspace/Users/himansh9767@outlook.com/azure-databricks-medallion-project
+        run: |
+          databricks workspace update-repo $REPO_PATH --branch main
