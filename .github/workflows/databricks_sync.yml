@@ -21,4 +21,4 @@ jobs:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
           REPO_PATH: /Workspace/Users/himansh9767@outlook.com/azure-databricks-medallion-project
         run: |
-          databricks workspace update-repo $REPO_PATH --branch main
+          databricks repos update $REPO_PATH --branch main
