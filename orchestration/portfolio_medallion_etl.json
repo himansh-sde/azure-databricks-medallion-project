@@ -1,0 +1,93 @@
+{
+  "name": "portfolio_medallion_etl",
+  "email_notifications": {
+    "on_start": [
+      "himansh9767@outlook.com"
+    ],
+    "on_success": [
+      "himansh9767@outlook.com"
+    ],
+    "on_failure": [
+      "himansh9767@outlook.com"
+    ],
+    "no_alert_for_skipped_runs": false
+  },
+  "webhook_notifications": {},
+  "notification_settings": {
+    "no_alert_for_skipped_runs": false,
+    "no_alert_for_canceled_runs": false
+  },
+  "timeout_seconds": 0,
+  "max_concurrent_runs": 1,
+  "tasks": [
+    {
+      "task_key": "01_bronze_ingestion",
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/himansh9767@outlook.com/azure-databricks-medallion-project/01_junior_baseline/02_bronze_ingestion",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "Job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "webhook_notifications": {},
+      "disabled": false
+    },
+    {
+      "task_key": "02_silver_transformation",
+      "depends_on": [
+        {
+          "task_key": "01_bronze_ingestion"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/himansh9767@outlook.com/azure-databricks-medallion-project/01_junior_baseline/03_silver_transformation",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "Job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "webhook_notifications": {},
+      "disabled": false
+    },
+    {
+      "task_key": "03_gold_aggregation",
+      "depends_on": [
+        {
+          "task_key": "02_silver_transformation"
+        }
+      ],
+      "run_if": "ALL_SUCCESS",
+      "notebook_task": {
+        "notebook_path": "/Workspace/Users/himansh9767@outlook.com/azure-databricks-medallion-project/01_junior_baseline/04_gold_aggregation",
+        "source": "WORKSPACE"
+      },
+      "job_cluster_key": "Job_cluster",
+      "timeout_seconds": 0,
+      "email_notifications": {},
+      "webhook_notifications": {},
+      "disabled": false
+    }
+  ],
+  "job_clusters": [
+    {
+      "job_cluster_key": "Job_cluster",
+      "new_cluster": {
+        "spark_version": "17.3.x-scala2.13",
+        "azure_attributes": {
+          "first_on_demand": 1,
+          "spot_bid_max_price": -1
+        },
+        "node_type_id": "Standard_D4s_v5",
+        "data_security_mode": "DATA_SECURITY_MODE_AUTO",
+        "runtime_engine": "STANDARD",
+        "kind": "CLASSIC_PREVIEW",
+        "is_single_node": true
+      }
+    }
+  ],
+  "queue": {
+    "enabled": true
+  }
+}
