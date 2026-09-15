@@ -42,6 +42,21 @@ Transitioned away from legacy Hive Metastore (`hive_metastore`) to Unity Catalog
 
 ---
 
+## 📸 Project Visuals
+
+**1. End-to-End Orchestration (Databricks Workflows)**
+![Medallion DAG](assets/Orch_DAG_DBricks.png)
+
+**2. Automated CI/CD (GitHub Actions)**
+![CI/CD Pipeline](assets/Github_Sync_Databricks_Workspace.png)
+
+**3. Unity Catalog Governance**
+![Unity Catalog Detail](assets/Describe_Detail_Gold_table.png)
+
+**4. Delta Lake Optimization (Z-Ordering & Bin-packing)**
+![Delta Optimization](assets/Describe_History_Silver_table.png)
+
+
 ## 📁 Repository Structure
 * `/notebooks`: Core PySpark and Spark SQL ETL scripts for Bronze, Silver, and Gold transformations.
 * `/orchestration`: Contains the `portfolio_medallion_etl.json` job definition.
